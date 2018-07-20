@@ -1,5 +1,5 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
+exports.__esModule = true;
 var express_1 = require("express");
 var express = require("express");
 var http_1 = require("http");
@@ -22,7 +22,10 @@ http.listen(port, function () {
 var io = socketio(http);
 io.on("connection", function (socket) {
     console.log("a user connected"),
-        socket.on('disconnect', function () {
-            return console.log('user disconnected');
+        socket.on("disconnect", function () {
+            return console.log("user disconnected");
         });
+    socket.on("chat message", function (msg) {
+        return io.emit("chat message", msg);
+    });
 });

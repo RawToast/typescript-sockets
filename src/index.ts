@@ -27,8 +27,12 @@ const io: socketio.Server = socketio(http)
 io.on("connection", (socket: any) => {
   console.log("a user connected"),
 
-    socket.on('disconnect', () =>
-      console.log('user disconnected')
-    )
-  }
+  socket.on("disconnect", () =>
+    console.log("user disconnected"),
+  )
+
+  socket.on("chat message", (msg) =>
+    io.emit("chat message", msg),
+  )
+  },
 )
